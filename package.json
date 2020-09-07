@@ -1,34 +1,38 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "name": "localizajobs",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
   "scripts": {
-    "start": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
-    "knex:migrate:rollback": "knex --knexfile knexfile.ts migrate:rollback"
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
   },
-  "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cors": "^2.8.7",
-    "@types/express": "^4.17.7",
-    "@types/jsonwebtoken": "^8.5.0",
-    "@types/morgan": "^1.9.1",
-    "@types/multer": "^1.4.4",
-    "@types/nodemailer": "^6.4.0",
-    "dotenv": "^8.2.0",
-    "ts-node-dev": "^1.0.0-pre.57",
-    "typescript": "^3.9.7"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "knex": "^0.21.5-next2",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.2",
-    "nodemailer": "^6.4.11",
-    "sqlite3": "^5.0.0"
-  }
+    "knex": "<0.20.0",
+    "pg": "^8.3.3",
+    "sqlite3": "latest",
+    "strapi": "3.1.4",
+    "strapi-admin": "3.1.4",
+    "strapi-connector-bookshelf": "3.1.4",
+    "strapi-plugin-content-manager": "3.1.4",
+    "strapi-plugin-content-type-builder": "3.1.4",
+    "strapi-plugin-email": "3.1.4",
+    "strapi-plugin-upload": "3.1.4",
+    "strapi-plugin-users-permissions": "3.1.4",
+    "strapi-utils": "3.1.4"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "edc52442-3833-44dc-93b4-99df0f7f2f21"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
 }
