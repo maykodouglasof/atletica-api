@@ -82,7 +82,7 @@ class AuthController extends Controller
         if(!$validator->fails()) {
             $email = $request->input('email');
             $password = $request->input('password');
-
+// teste
             $token = auth()->attempt([
                 'email' => $email,
                 'password' => $password
