@@ -74,5 +74,8 @@ class DatabaseSeeder extends Seeder
         DB::table("courses")->insert([
             "name" => "Sistemas De Informação"
         ]);
+        DB::table("courses")->insert([
+            "name" => "Jogos Digitais"
+        ]);
     }
 }
