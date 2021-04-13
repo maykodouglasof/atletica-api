@@ -140,6 +140,8 @@ class Createalltables extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('associated');
+        Schema::dropIfExists('courses');
         Schema::dropIfExists('units');
         Schema::dropIfExists('unitpeoples');
         Schema::dropIfExists('unitvehicles');
