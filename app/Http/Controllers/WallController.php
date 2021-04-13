@@ -10,14 +10,15 @@ use App\Models\User;
 
 class WallController extends Controller
 {
-    public function getAll(){
+    public function getAll()
+    {
         $array = ['error' => '', 'list' => []];
 
         $user = auth()->user();
 
         $walls = Wall::all();
 
-        foreach($walls as $wallKey => $wallValue) {
+        foreach ($walls as $wallKey => $wallValue) {
             $walls[$wallKey]['likes'] = 0;
             $walls[$wallKey]['liked'] = false;
 
@@ -25,10 +26,10 @@ class WallController extends Controller
             $walls[$wallKey]['likes'] = $likes;
 
             $meLikes = WallLike::where('id_wall', $wallValue['id'])
-            ->where('id_user', $user['id'])
-            ->count();
+                ->where('id_user', $user['id'])
+                ->count();
 
-            if($meLikes > 0){
+            if ($meLikes > 0) {
                 $walls[$wallKey]['liked'] = true;
             }
         }
@@ -38,20 +39,21 @@ class WallController extends Controller
         return $array;
     }
 
-    public function like($id) {
+    public function like($id)
+    {
         $array = ['error' => ''];
 
         $user = auth()->user();
 
         $meLikes = WallLike::where("id_wall", $id)
-        ->where("id_user", $user["id"])
-        ->count();
+            ->where("id_user", $user["id"])
+            ->count();
 
-        if($meLikes > 0) {
+        if ($meLikes > 0) {
             // remover o like
             WallLike::where('id_wall', $id)
-            ->where('id_user', $user['id'])
-            ->delete();
+                ->where('id_user', $user['id'])
+                ->delete();
 
             $array['liked'] = false;
         } else {
@@ -62,8 +64,8 @@ class WallController extends Controller
             $newLike->save();
             $array["liked"] = true;
         }
- 
-        $array['likes'] = Wallike::where("id_wall", $id)->count();
+
+        $array['likes'] = WallLike::where("id_wall", $id)->count();
 
         return $array;
     }

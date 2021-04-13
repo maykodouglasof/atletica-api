@@ -12,6 +12,16 @@ use App\Models\UnitPet;
 
 class UnitController extends Controller
 {
+    public function getAll(){
+        $array = ['error' => ''];
+
+        $units = Unit::all();
+        
+        $array['list'] = $units;
+
+        return $array;
+    }
+    
     public function getInfo($id) {
         $array = ['error' => ''];
 
@@ -79,7 +89,7 @@ class UnitController extends Controller
             $newVehicle->save();
         } else {
             $array['error'] = $validator->errors()->first();
-            return $array
+            return $array;
         }
         return $array;
     }

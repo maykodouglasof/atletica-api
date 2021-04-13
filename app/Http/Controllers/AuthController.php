@@ -75,21 +75,21 @@ class AuthController extends Controller
         $array = ['error' => ''];
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
+            'cpf' => 'required|digits:11',
             'password' => 'required'
         ]);
 
         if(!$validator->fails()) {
-            $email = $request->input('email');
+            $cpf = $request->input('cpf');
             $password = $request->input('password');
-// teste
+
             $token = auth()->attempt([
-                'email' => $email,
+                'cpf' => $cpf,
                 'password' => $password
             ]);
 
             if(!$token){
-                $array['error'] = 'Email e/ou Senha estão errados.';
+                $array['error'] = 'CPF e/ou Senha estão errados.';
                 return $array;
             }
 

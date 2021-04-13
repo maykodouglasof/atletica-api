@@ -12,6 +12,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WallController;
 use App\Http\Controllers\WarningController;
+use App\Http\Controllers\AreaController;
 
 Route::get('/ping', function () {
     return ['pong'=>true];
@@ -47,6 +48,7 @@ Route::middleware("auth:api")->group(function(){
     Route::put("/foundandlost/{id}", [FoundAndLostController::class, "update"]);
 
     // Unidade
+    Route::get("/units", [UnitController::class, "getAll"]);
     Route::get("/unit/{id}", [UnitController::class, "getInfo"]);
     Route::post("/unit/{id}/addperson", [UnitController::class, "addPerson"]);
     Route::post("/unit/{id}/addvehicle", [UnitController::class, "addVehicle"]);
@@ -54,6 +56,9 @@ Route::middleware("auth:api")->group(function(){
     Route::delete("/unit/{id}/removeperson", [UnitController::class, "removePerson"]);
     Route::delete("/unit/{id}/removevehicle", [UnitController::class, "removeVehicle"]);
     Route::delete("/unit/{id}/removepet", [UnitController::class, "removePet"]);
+
+     // Area
+     Route::get("/areas", [AreaController::class, "getAll"]);
 
     // Reservas
     Route::get("/reservations", [ReservationController::class, "getReservations"]);
@@ -64,5 +69,10 @@ Route::middleware("auth:api")->group(function(){
     
     Route::get("/myreservations", [ReservationController::class, "getMyReservations"]);
     Route::delete("/myreservation/{id}", [ReservationController::class, "removeReservation"]);
+    
+    // Usuário
+    Route::get('/user/{id}', [UserController::class, 'getInfo']);
+    Route::put('/user/{id}', [UserController::class, 'update']);
+    Route::put('/user/{id}/newpassword', [UserController::class, 'newPassword']);
 
 });
