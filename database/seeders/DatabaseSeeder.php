@@ -68,5 +68,11 @@ class DatabaseSeeder extends Seeder
             "body" => "Bla bla bla",
             "datecreated" => "2020-01-19 19:00:00"
         ]);
+        DB::table("courses")->insert([
+            "name" => "Ciência da Computação"
+        ]);
+        DB::table("courses")->insert([
+            "name" => "Sistemas De Informação"
+        ]);
     }
 }
