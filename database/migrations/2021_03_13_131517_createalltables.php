@@ -19,6 +19,21 @@ class Createalltables extends Migration
             $table->string('email')->unique();
             $table->string('cpf')->unique();
             $table->string('password');
+            $table->string('admin');
+        });
+
+        Schema::create('associated', function(Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('cpf')->unique();
+            $table->string('course');
+            $table->string('password');
+            $table->string('admin');
+        });
+        Schema::create('courses', function(Blueprint $table) {
+            $table->id();
+            $table->string('name');
         });
 
         Schema::create('units', function(Blueprint $table) {
