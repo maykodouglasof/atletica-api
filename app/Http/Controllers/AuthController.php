@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Unit;
+use App\Models\Course;
 
 class AuthController extends Controller
 {
@@ -21,6 +22,7 @@ class AuthController extends Controller
         $array = ['error' => ''];
 
         $validator = Validator::make($request->all(), [
+            'username' => 'required|unique:users,username',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'cpf' => 'required|digits:11|unique:users,cpf',
@@ -29,18 +31,22 @@ class AuthController extends Controller
         ]);
 
         if(!$validator->fails()) {
+            $username = $request->input('username');
             $name = $request->input('name');
             $email = $request->input('email');
             $cpf = $request->input('cpf');
             $password = $request->input('password');
+            $id_course = $request->input('id_course');
 
             $hash = password_hash($password, PASSWORD_DEFAULT);
             
             $newUser = new User();
+            $newUser->username = $username;
             $newUser->name = $name;
             $newUser->email = $email;
             $newUser->cpf = $cpf;
             $newUser->password = $hash;
+            $newUser->id_course = $id_course;
             $newUser->save();
             
             $token = auth()->attempt([
@@ -58,11 +64,11 @@ class AuthController extends Controller
             $user = auth()->user();
             $array['user'] = $user;
 
-            $properties = Unit::select(['id', 'name'])
-            ->where('id_owner', $user['id'])
+            $courses = Course::select(['id', 'name'])
+            ->where('id_associated', $user['id'])
             ->get();
 
-            $array['user']['properties'] = $properties;
+            $array['user']['courses'] = $courses;
 
         } else {
             $array['error'] = $validator->errors()->first();
@@ -98,11 +104,11 @@ class AuthController extends Controller
             $user = auth()->user();
             $array['user'] = $user;
 
-            $properties = Unit::select(['id', 'name'])
-            ->where('id_owner', $user['id'])
+            $courses = Course::select(['id', 'name'])
+            ->where('id_associated', $user['id'])
             ->get();
 
-            $array['user']['properties'] = $properties;
+            $array['user']['courses'] = $courses;
 
         } else {
             $array['error'] = $validator->errors()->first();

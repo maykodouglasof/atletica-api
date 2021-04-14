@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WallController;
 use App\Http\Controllers\WarningController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\CourseController;
 
 Route::get('/ping', function () {
     return ['pong'=>true];
@@ -22,6 +23,9 @@ Route::get("/401", [AuthController::class, "unauthorized"])->name("login");
 
 Route::post("/auth/login", [AuthController::class, "login"]);
 Route::post("/auth/register", [AuthController::class, "register"]);
+    
+// Cursos
+Route::get("/courses", [CourseController::class, "getAll"]);
 
 Route::middleware("auth:api")->group(function(){
     Route::post("/auth/validate", [AuthController::class, "validateToken"]);
@@ -74,5 +78,4 @@ Route::middleware("auth:api")->group(function(){
     Route::get('/user/{id}', [UserController::class, 'getInfo']);
     Route::put('/user/{id}', [UserController::class, 'update']);
     Route::put('/user/{id}/newpassword', [UserController::class, 'newPassword']);
-
 });

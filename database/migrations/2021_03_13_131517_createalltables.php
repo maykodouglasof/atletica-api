@@ -15,11 +15,13 @@ class Createalltables extends Migration
     {
         Schema::create('users', function(Blueprint $table) {
             $table->id();
+            $table->string('username')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('cpf')->unique();
             $table->string('password');
             $table->string('admin');
+            $table->integer('id_course');
         });
 
         Schema::create('associated', function(Blueprint $table) {
