@@ -8,7 +8,7 @@ use App\Models\Course;
 
 class CourseController extends Controller
 {
-    public function getAll(){
+    public function getAll() {
         $array = ['error' => ''];
 
         $courses = Course::all();
