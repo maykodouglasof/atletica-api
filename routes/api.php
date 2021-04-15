@@ -24,9 +24,6 @@ Route::get("/401", [AuthController::class, "unauthorized"])->name("login");
 Route::post("/auth/login", [AuthController::class, "login"]);
 Route::post("/auth/register", [AuthController::class, "register"]);
     
-// Cursos
-Route::get("/courses", [CourseController::class, "getAll"]);
-
 Route::middleware("auth:api")->group(function(){
     Route::post("/auth/validate", [AuthController::class, "validateToken"]);
     Route::post("/auth/logout", [AuthController::class, "logout"]);
@@ -79,3 +76,6 @@ Route::middleware("auth:api")->group(function(){
     Route::put('/user/{id}', [UserController::class, 'update']);
     Route::put('/user/{id}/newpassword', [UserController::class, 'newPassword']);
 });
+
+// Cursos
+Route::get("/courses", [CourseController::class, "getAll"]);
