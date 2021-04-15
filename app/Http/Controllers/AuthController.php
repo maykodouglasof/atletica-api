@@ -22,7 +22,6 @@ class AuthController extends Controller
         $array = ['error' => ''];
 
         $validator = Validator::make($request->all(), [
-            'username' => 'required|unique:users,username',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'cpf' => 'required|digits:11|unique:users,cpf',
