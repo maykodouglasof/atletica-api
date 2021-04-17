@@ -126,11 +126,11 @@ class AuthController extends Controller
         $user = auth()->user();
         $array['user'] = $user;
 
-        $properties = Unit::select(['id', 'name'])
-        ->where('id_owner', $user['id'])
+        $courses = Course::select(['id', 'name'])
+        ->where('id', $user['id_course'])
         ->get();
 
-        $array['user']['properties'] = $properties;
+        $array['user']['courses'] = $courses;
 
         return $array;
     }
