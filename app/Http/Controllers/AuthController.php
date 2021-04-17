@@ -22,6 +22,7 @@ class AuthController extends Controller
         $array = ['error' => ''];
 
         $validator = Validator::make($request->all(), [
+            'username' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'cpf' => 'required|digits:11|unique:users,cpf',
@@ -36,6 +37,7 @@ class AuthController extends Controller
             $cpf = $request->input('cpf');
             $password = $request->input('password');
             $id_course = $request->input('id_course');
+            $admin = $request->input('admin');
 
             $hash = password_hash($password, PASSWORD_DEFAULT);
             
@@ -46,6 +48,7 @@ class AuthController extends Controller
             $newUser->cpf = $cpf;
             $newUser->password = $hash;
             $newUser->id_course = $id_course;
+            $newUser->admin = $admin;
             $newUser->save();
             
             $token = auth()->attempt([
@@ -64,7 +67,7 @@ class AuthController extends Controller
             $array['user'] = $user;
 
             $courses = Course::select(['id', 'name'])
-            ->where('id_associated', $user['id'])
+            ->where('id', $user['id_course'])
             ->get();
 
             $array['user']['courses'] = $courses;

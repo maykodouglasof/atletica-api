@@ -10,6 +10,16 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function getAll(){
+        $array = ['error' => ''];
+
+        $users = User::all();
+        
+        $array['list'] = $users;
+
+        return $array;
+    }
+
     public function getInfo($id)
     {
         $array = ['error' => ''];
