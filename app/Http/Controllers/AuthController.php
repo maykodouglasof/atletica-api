@@ -107,7 +107,7 @@ class AuthController extends Controller
             $array['user'] = $user;
 
             $courses = Course::select(['id', 'name'])
-            ->where('id_associated', $user['id'])
+            ->where('id', $user['id_course'])
             ->get();
 
             $array['user']['courses'] = $courses;
